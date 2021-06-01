@@ -17,3 +17,6 @@ createTimestamp: 20210531184401Z
 entryCSN: 20210531184401.765150Z#000000#000#000000
 modifiersName: cn=config
 modifyTimestamp: 20210531184401Z
+olcAccess: {0}to attrs=userPassword, by self write by anonymous auth by * none
+olcAccess: {1} to * by self write by * read
+
