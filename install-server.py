@@ -32,7 +32,8 @@ def apache():
 	os.system('openssl genrsa -out 10_2_7_71_Group_2.key 1024 >> /root/apache_install.log 2>&1 && openssl req -new -key 10_2_7_71_Group_2.key -subj "/C=US/ST=Kentucky/L=Highland Heights/O=NKU/CN=10-2-7-71-Group-2" -out 10_2_7_71_Group_2.csr && openssl x509 -req -days 365 -in 10_2_7_71_Group_2.csr -signkey 10_2_7_71_Group_2.key -out 10_2_7_71_Group_2.crt >> /root/ApacheInstallScriptLog 2>&1')# Creates .key file for SSL 
 	#Configures the firewall and starts apache webserver
 	os.system('echo Configuring Firewall for Apache | tee -a /root/apache_install.log && sudo firewall-cmd --permanent --add-port=80/tcp >> /root/apache_install.log 2>&1 && sudo firewall-cmd --permanent --add-port=443/tcp >> /root/apache_install.log 2>&1 && sudo firewall-cmd --reload>> /root/apache_install.log 2>&1 && echo Waiting for Firewall to reload | tee  -a /root/apache_install.log && sleep 5 && echo Firewall reloaded | tee  -a /root/apache_install.log && systemctl -l status firewalld >> /root/apache_install.log 2>&1 && systemctl start httpd >> /root/apache_install.log 2>&1 && systemctl status httpd >> /root/apache_install.log 2>&1 ') 
-
+	#Configures system settings to allow public traffic.
+	os.system('setsebool -P httpd_enable_homedirs on && chcon -R -t httpd_sys_content_t /home/ && chcon -R -t httpd_sys_rw_content_t /home/')
 
 def main(args):
     	#Starts LDAP Install
