@@ -2,7 +2,7 @@ import os, argparse
 #Creates Command line Argument Parsers
 parser=argparse.ArgumentParser(usage='Quickly install or reinstall servers',description='Used to install 1 or more servers including: Apache 2.4, NFS, and LDAP  |  Format: python3 ./install-server [-l,--ldap][-n,--nfs][-a,--apache]',add_help=True,allow_abbrev=True)
 parser.add_argument('-l','--ldap', help='installs and Configure LDAP services using openldap and its dependencies.',action='store_const', const='ldap')
-parser.add_argument('-n','--nfs', help='installs and Configure NFS services and configures a new partition to serve as the /home partition',action='store_const', const='nfs')
+parser.add_argument('-n','--nfs', help='installs and Configure NFS services',action='store_const', const='nfs')
 parser.add_argument('-a','--apache', help='installs and Configure apache webserver 2.4 services using openldap and its dependencies.',action='store_const', const='apache')
 args = parser.parse_args()
 
@@ -16,14 +16,12 @@ def ldap():
 	#Configures Firewall for LDAP service
 	os.system('firewall-cmd --zone=public --add-port=389/tcp --permanent && firewall-cmd --zone=public --add-port=636/tcp --permanent && firewall-cmd --reload')
 def nfs():
-	def NFS():
 	#Downloading configuration files and installing NFS
-	os.system ('yum install -y nfs-utils && exportfs -a && wget https://github.com/NKU-2-4orBUST/Project2/raw/main/fstab && wget https://github.com/NKU-2-4orBUST/Project2/raw/main/exports && ')
+	os.system ('yum install -y nfs-utils && wget https://github.com/NKU-2-4orBUST/Project2/raw/main/fstab https://github.com/NKU-2-4orBUST/Project2/raw/main/exports && exportfs -a  ')
 	# and mounting new partition
-	os.system('systemctl restart nfs && systemctl start nfslock && systemctl start  rpcbin') # starting NFS and required services
+	os.system('systemctl start nfs && systemctl start nfslock && systemctl start rpcbin') # starting NFS and required services
 	#Firewall configured and reloaded.
-	os.system ('firewall-cmd --zone=public --add-port=2049/tcp --permanent && firewall-cmd --zone=public --add-port=111/tcp --permanent && firewall-cmd --zone=public --add-port=20048/tcp --permanent && firewall-cmd --zone=public --add-port=2049/udp --permanent && firewall-cmd --zone=public --add-port=111/udp --permanent && firewall-cmd --zone=public --add-port=20048/udp -–permanent && firewall-cmd --reload ')
-    return
+	os.system ('firewall-cmd --zone=public --add-port=2049/tcp --permanent && firewall-cmd --zone=public --add-port=111/tcp --permanent && firewall-cmd --zone=public --add-port=20048/tcp --permanent && firewall-cmd --zone=public --add-port=2049/udp --permanent && firewall-cmd --zone=public --add-port=111/udp --permanent && firewall-cmd --zone=public --add-port=20048/udp -–permanent && systemctl restart firewalld')
 
 def apache():
 	#Changes pythons to tmp directory save files just for the install
@@ -49,7 +47,7 @@ def main(args):
 	#Starts NFS Install
     	if args.nfs == 'nfs': 
         	print('Starting NFS')
-        	#nfs()
+        	nfs()
 	#Starts Apache Install
     	if args.apache == 'apache': # Starts Apache Install
         	print('Future space for apache web server: PENDING APPROVAL')
