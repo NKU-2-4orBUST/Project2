@@ -21,7 +21,7 @@ def nfs():
 	# and mounting new partition
 	os.system('systemctl start nfs && systemctl start nfslock && systemctl start rpcbin') # starting NFS and required services
 	#Firewall configured and reloaded.
-	os.system ('firewall-cmd --zone=public --add-port=2049/tcp --permanent && firewall-cmd --zone=public --add-port=111/tcp --permanent && firewall-cmd --zone=public --add-port=20048/tcp --permanent && firewall-cmd --zone=public --add-port=2049/udp --permanent && firewall-cmd --zone=public --add-port=111/udp --permanent && firewall-cmd --zone=public --add-port=20048/udp -–permanent && systemctl restart firewalld')
+	os.system ('firewall-cmd --zone=public --add-port=2049/tcp --permanent && firewall-cmd --zone=public --add-port=111/tcp --permanent && firewall-cmd --zone=public --add-port=20048/tcp --permanent && firewall-cmd --zone=public --add-port=2049/udp --permanent && firewall-cmd --zone=public --add-port=111/udp --permanent && firewall-cmd --zone=public --add-port=20048/udp --permanent && systemctl restart firewalld')
 
 def apache():
 	#Changes pythons to tmp directory save files just for the install
