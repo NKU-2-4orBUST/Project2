@@ -17,18 +17,12 @@ def ldap():
 	os.system('firewall-cmd --zone=public --add-port=389/tcp --permanent && firewall-cmd --zone=public --add-port=636/tcp --permanent && firewall-cmd --reload')
 def nfs():
 	def NFS():
-	#Creates New partition using the rest of available space
-	os.system('fdisk /dev/sda && n &&' + press('enter') + press('enter')+ '&& w')#
-	
-	os.system('partprobe /dev/sda && mkfs.xfs /dev/sda1 && mount /dev/sda1 /home') #make Centos recognize the new partition,
-	# Format the new partition as an ext3 file system and reboot
 	#Downloading configuration files and installing NFS
 	os.system ('yum install -y nfs-utils && exportfs -a && wget https://github.com/NKU-2-4orBUST/Project2/raw/main/fstab && wget https://github.com/NKU-2-4orBUST/Project2/raw/main/exports && ')
 	# and mounting new partition
 	os.system('systemctl restart nfs && systemctl start nfslock && systemctl start  rpcbin') # starting NFS and required services
 	#Firewall configured and reloaded.
 	os.system ('firewall-cmd --zone=public --add-port=2049/tcp --permanent && firewall-cmd --zone=public --add-port=111/tcp --permanent && firewall-cmd --zone=public --add-port=20048/tcp --permanent && firewall-cmd --zone=public --add-port=2049/udp --permanent && firewall-cmd --zone=public --add-port=111/udp --permanent && firewall-cmd --zone=public --add-port=20048/udp -–permanent && firewall-cmd --reload ')
-	
     return
 
 def apache():
