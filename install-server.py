@@ -42,8 +42,8 @@ def main(args):
 	os.chdir('/tmp')
     	#Starts LDAP Install
 	if args.ldap == 'ldap':
-        	print('Installing LDAP ')
-        	ldap()
+		print('Installing LDAP ')
+		ldap()
 	#Starts NFS Install
 	if args.nfs == 'nfs':
 		print('Starting NFS')
