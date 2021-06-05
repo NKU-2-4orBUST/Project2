@@ -41,15 +41,15 @@ def main(args):
 	#Changes pythons to tmp directory save files just for the install
 	os.chdir('/tmp')
     	#Starts LDAP Install
-    	if args.ldap == 'ldap': 
+	if args.ldap == 'ldap':
         	print('Installing LDAP ')
         	ldap()
 	#Starts NFS Install
-    	if args.nfs == 'nfs': 
+    	if args.nfs == 'nfs':
         	print('Starting NFS')
         	nfs()
 	#Starts Apache Install
-    	if args.apache == 'apache': # Starts Apache Install
+    	if args.apache == 'apache':
         	print('Installing Apache Web Server 2.4')
         	apache()
 	sys('echo "System will reboot in 5 seconds..."; shutdown -r 5')
