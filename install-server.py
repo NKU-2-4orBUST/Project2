@@ -16,12 +16,12 @@ def ldap():
 	# Configures Firewall for LDAP service
 	os.system('echo Configuring firewall for LDAP services.... | tee -a /var/log/ldap_install.log; firewall-cmd --zone=public --add-port=389/tcp --permanent >> /var/log/ldap_install.log 2>&1; firewall-cmd --zone=public --add-port=636/tcp --permanent >> /var/log/ldap_install.log 2>&1; firewall-cmd --reload >> /var/log/ldap_install.log 2>&1; firewall-cmd --list-all  >> /var/log/ldap_install.log 2>&1')
 def nfs():
-	# Downloading configuration files and installing NFS  erase if no longer needed -- https://github.com/NKU-2-4orBUST/Project2/raw/main/fstab.txt
-	os.system('yum install -y nfs-utils rpcbin; wget https://github.com/NKU-2-4orBUST/Project2/raw/main/exports.txt; exportfs -a  ')
-	# Exporting /HOME directory and starting NFS and required services
-	os.system('cat exports.txt > /etc/exports; systemctl start nfs; systemctl start nfslock') 
+	# Downloading configuration files and installing NFS
+	os.system('echo Downloading configuration files and installing NFS.... | tee -a /var/log/ldap_install.log;yum install -y nfs-utils rpcbin >> /var/log/nfs_install.log 2>&1; wget https://github.com/NKU-2-4orBUST/Project2/raw/main/exports.txt >> /var/log/nfs_install.log 2>&1; exportfs -a | tee -a /var/log/nfs_install.log')
+	# Exporting /HOME directory and starting NFS services
+	os.system('echo Exporting /HOME directory and starting NFS services.... | tee -a /var/log/ldap_install.log; cat exports.txt > /etc/exports | tee -a /var/log/nfs_install.log; systemctl start nfs >> /var/log/nfs_install.log 2>&1; systemctl start nfslock >> /var/log/nfs_install.log 2>&1') 
 	#Firewall configured and reloaded.
-	os.system('firewall-cmd --zone=public --add-port=2049/tcp --permanent; firewall-cmd --zone=public --add-port=111/tcp --permanent; firewall-cmd --zone=public --add-port=20048/tcp --permanent; firewall-cmd --zone=public --add-port=2049/udp --permanent; firewall-cmd --zone=public --add-port=111/udp --permanent; firewall-cmd --zone=public --add-port=20048/udp --permanent; systemctl restart firewalld')
+	os.system('echo Configuring firewall for NFS services.... | tee -a /var/log/ldap_install.log; firewall-cmd --zone=public --add-port=2049/tcp --permanent  >> /var/log/nfs_install.log 2>&1; firewall-cmd --zone=public --add-port=111/tcp --permanent >> /var/log/nfs_install.log 2>&1; firewall-cmd --zone=public --add-port=20048/tcp --permanent  >> /var/log/nfs_install.log 2>&1; firewall-cmd --zone=public --add-port=2049/udp --permanent >> /var/log/nfs_install.log 2>&1; firewall-cmd --zone=public --add-port=111/udp --permanent  >> /var/log/nfs_install.log 2>&1; firewall-cmd --zone=public --add-port=20048/udp --permanent  >> /var/log/nfs_install.log 2>&1; firewall-cmd --reload  >> /var/log/nfs_install.log 2>&1; firewall-cmd --list-all >> /var/log/nfs_install.log 2>&1')
 
 def apache():	
 	#Downloads required Configs and Installs software
