@@ -8,7 +8,7 @@ args = parser.parse_args()
 
 def ldap():
 	os.system('yum -y install openldap-servers openldap-clients  >> /var/log/ldap.log && wget https://github.com/NKU-2-4orBUST/Project2/raw/main/olc2 http://faculty.cs.nku.edu/~waldenj/classes/2011/summer/cit470/labs/example.ldif')
-	os.system('rm -f /var/lib/ldap/*  >> /var/log/ldap.log && cat ./olc2 > /etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb.ldif  >> /var/log/ldap.log')
+	os.system('rm -f /var/lib/ldap/*  >> /var/log/ldap.log && cat ./olc2 > /etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb.ldif  | tee /var/log/ldap.log')
 	os.system('ldapadd -x -D "cn=Manager,dc=cit470,dc=nku,dc=edu" -w Nhy67ujm! -f example.ldif  >> /var/log/ldap.log')
 	os.system('firewall-cmd --zone=public --add-port=389/tcp --permanent  >> /var/log/ldap.log && firewall-cmd --zone=public --add-port=636/tcp --permanent  >> /var/log/ldap.log && systemctl restart firewalld  >> /var/log/ldap.log >> systemctl status firewalld  >> /var/log/ldap.log')
 	os.system('systemctl start slapd, systemctl status slapd')	
