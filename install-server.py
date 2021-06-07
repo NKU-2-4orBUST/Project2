@@ -23,19 +23,19 @@ def nfs():
 	#Firewall configured and reloaded.
 	os.system('echo Configuring firewall for NFS services.... | tee -a /var/log/ldap_install.log; firewall-cmd --zone=public --add-port=2049/tcp --permanent  >> /var/log/nfs_install.log 2>&1; firewall-cmd --zone=public --add-port=111/tcp --permanent >> /var/log/nfs_install.log 2>&1; firewall-cmd --zone=public --add-port=20048/tcp --permanent  >> /var/log/nfs_install.log 2>&1; firewall-cmd --zone=public --add-port=2049/udp --permanent >> /var/log/nfs_install.log 2>&1; firewall-cmd --zone=public --add-port=111/udp --permanent  >> /var/log/nfs_install.log 2>&1; firewall-cmd --zone=public --add-port=20048/udp --permanent  >> /var/log/nfs_install.log 2>&1; firewall-cmd --reload  >> /var/log/nfs_install.log 2>&1; firewall-cmd --list-all >> /var/log/nfs_install.log 2>&1')
 
-def apache():	
+#def apache():	
 	#Downloads required Configs and Installs software
-	os.system('echo Installing Apache 2.4 and Mod_ssl.... | tee  -a /var/log/apache_install.log; yum -y install httpd mod_ssl >> /var/log/apache_install.log 2>&1; wget https://github.com/NKU-2-4orBUST/Project1/raw/main/httpd.conf https://github.com/NKU-2-4orBUST/Project1/raw/main/userdir.conf >> /var/log/apache_install.log 2>&1')
+#	os.system('echo Installing Apache 2.4 and Mod_ssl.... | tee  -a /var/log/apache_install.log; yum -y install httpd mod_ssl >> /var/log/apache_install.log 2>&1; wget https://github.com/NKU-2-4orBUST/Project1/raw/main/httpd.conf https://github.com/NKU-2-4orBUST/Project1/raw/main/userdir.conf >> /var/log/apache_install.log 2>&1')
 	#Configures apache 2.4 web server
-	os.system('echo Configuring Apache Webserver... | tee -a /var/log/apache_install.log; \\cp httpd.conf /etc/httpd/conf >> /var/log/apache_install.log; \\cp userdir.conf /etc/httpd/conf.d/ >> /var/log/apache_install.log; mkdir /etc/httpd/ssl;  echo "<home><body><h1>It works for Root!</h1></body></html>" > /var/www/html/index.html | tee -a /var/log/ldap_install.log; wget -P /var/www/html/ https://github.com/NKU-2-4orBUST/Project2/raw/main/client-ks.cfg >> /var/log/ldap_install.log')
+#	os.system('echo Configuring Apache Webserver... | tee -a /var/log/apache_install.log; \\cp httpd.conf /etc/httpd/conf >> /var/log/apache_install.log; \\cp userdir.conf /etc/httpd/conf.d/ >> /var/log/apache_install.log; mkdir /etc/httpd/ssl;  echo "<home><body><h1>It works for Root!</h1></body></html>" > /var/www/html/index.html | tee -a /var/log/ldap_install.log; wget -P /var/www/html/ https://github.com/NKU-2-4orBUST/Project2/raw/main/client-ks.cfg >> /var/log/ldap_install.log')
 	#Changes to new SLL directory to generate SSL keys in the next step
-	os.chdir('/etc/httpd/ssl')#Changes to SSL directory
+#	os.chdir('/etc/httpd/ssl')#Changes to SSL directory
 	#Generates SSL keys for HTTPS 
-	os.system('openssl genrsa -out 10_2_7_71_Group_2.key 1024 >> /var/log/apache_install.log 2>&1; openssl req -new -key 10_2_7_71_Group_2.key -subj "/C=US/ST=Kentucky/L=Highland Heights/O=NKU/CN=10-2-7-71-Group-2" -out 10_2_7_71_Group_2.csr; openssl x509 -req -days 365 -in 10_2_7_71_Group_2.csr -signkey 10_2_7_71_Group_2.key -out 10_2_7_71_Group_2.crt >> /var/log/ApacheInstallScriptLog 2>&1')# Creates .key file for SSL 
+#	os.system('openssl genrsa -out 10_2_7_71_Group_2.key 1024 >> /var/log/apache_install.log 2>&1; openssl req -new -key 10_2_7_71_Group_2.key -subj "/C=US/ST=Kentucky/L=Highland Heights/O=NKU/CN=10-2-7-71-Group-2" -out 10_2_7_71_Group_2.csr; openssl x509 -req -days 365 -in 10_2_7_71_Group_2.csr -signkey 10_2_7_71_Group_2.key -out 10_2_7_71_Group_2.crt >> /var/log/ApacheInstallScriptLog 2>&1')# Creates .key file for SSL 
 	#Configures the firewall and starts apache webserver
-	os.system('echo Configuring Firewall for Apache | tee -a /var/log/apache_install.log; sudo firewall-cmd --permanent --add-port=80/tcp >> /var/log/apache_install.log 2>&1; sudo firewall-cmd --permanent --add-port=443/tcp >> /var/log/apache_install.log 2>&1; sudo firewall-cmd --reload>> /var/log/apache_install.log 2>&1; echo Waiting for Firewall to reload | tee  -a /var/log/apache_install.log; sleep 5; echo Firewall reloaded | tee  -a /var/log/apache_install.log; systemctl -l status firewalld >> /var/log/apache_install.log 2>&1; systemctl start httpd >> /var/log/apache_install.log 2>&1; systemctl status httpd >> /var/log/apache_install.log 2>&1 ') 
+#	os.system('echo Configuring Firewall for Apache | tee -a /var/log/apache_install.log; sudo firewall-cmd --permanent --add-port=80/tcp >> /var/log/apache_install.log 2>&1; sudo firewall-cmd --permanent --add-port=443/tcp >> /var/log/apache_install.log 2>&1; sudo firewall-cmd --reload>> /var/log/apache_install.log 2>&1; echo Waiting for Firewall to reload | tee  -a /var/log/apache_install.log; sleep 5; echo Firewall reloaded | tee  -a /var/log/apache_install.log; systemctl -l status firewalld >> /var/log/apache_install.log 2>&1; systemctl start httpd >> /var/log/apache_install.log 2>&1; systemctl status httpd >> /var/log/apache_install.log 2>&1 ') 
 	#Configures system settings to allow public traffic and enable and starts apache.
-	os.system('setsebool -P httpd_enable_homedirs on; chcon -R -t httpd_sys_content_t /home/; chcon -R -t httpd_sys_rw_content_t /home/; systemctl start httpd >> /var/log/apache_install.log 2>&1; systemctl status httpd >> /var/log/apache_install.log 2>&1; systemctl enable httpd>> /var/log/apache_install.log 2>&1')
+#	os.system('setsebool -P httpd_enable_homedirs on; chcon -R -t httpd_sys_content_t /home/; chcon -R -t httpd_sys_rw_content_t /home/; systemctl start httpd >> /var/log/apache_install.log 2>&1; systemctl status httpd >> /var/log/apache_install.log 2>&1; systemctl enable httpd>> /var/log/apache_install.log 2>&1')
 
 def main(args):
 	#Changes pythons to tmp directory save files just for the install
@@ -49,9 +49,9 @@ def main(args):
 		print('Starting NFS')
 		nfs()
 	#Starts Apache Install
-	if args.apache == 'apache':
-		print('Installing Apache Web Server 2.4')
-		apache()
+#	if args.apache == 'apache':
+#		print('Installing Apache Web Server 2.4')
+#		apache()
 	os.system('echo "System will reboot in 5 seconds...";sleep 5; shutdown -r 0')
 
 main(args)
