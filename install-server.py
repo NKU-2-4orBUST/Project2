@@ -22,7 +22,6 @@ def nfs():
 	os.system('echo Exporting /HOME directory and starting NFS services.... | tee -a /var/log/ldap_install.log; cat exports.txt > /etc/exports | tee -a /var/log/nfs_install.log; systemctl start nfs nfs >> /var/log/nfs_install.log 2>&1; systemctl enable nfs nfslock >> /var/log/nfs_install.log 2>&1') 
 	#Firewall configured and reloaded.
 	os.system('echo Configuring firewall for NFS services.... | tee -a /var/log/ldap_install.log; firewall-cmd --zone=public --add-port=2049/tcp --permanent  >> /var/log/nfs_install.log 2>&1; firewall-cmd --zone=public --add-port=111/tcp --permanent >> /var/log/nfs_install.log 2>&1; firewall-cmd --zone=public --add-port=20048/tcp --permanent  >> /var/log/nfs_install.log 2>&1; firewall-cmd --zone=public --add-port=2049/udp --permanent >> /var/log/nfs_install.log 2>&1; firewall-cmd --zone=public --add-port=111/udp --permanent  >> /var/log/nfs_install.log 2>&1; firewall-cmd --zone=public --add-port=20048/udp --permanent  >> /var/log/nfs_install.log 2>&1; firewall-cmd --reload  >> /var/log/nfs_install.log 2>&1; firewall-cmd --list-all >> /var/log/nfs_install.log 2>&1')
-
 #def apache():	
 	#Downloads required Configs and Installs software
 #	os.system('echo Installing Apache 2.4 and Mod_ssl.... | tee  -a /var/log/apache_install.log; yum -y install httpd mod_ssl >> /var/log/apache_install.log 2>&1; wget https://github.com/NKU-2-4orBUST/Project1/raw/main/httpd.conf https://github.com/NKU-2-4orBUST/Project1/raw/main/userdir.conf >> /var/log/apache_install.log 2>&1')
