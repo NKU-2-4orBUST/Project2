@@ -35,7 +35,7 @@ def apache():
 	#Configures the firewall and starts apache webserver
 	os.system('echo Configuring Firewall for Apache | tee -a /var/log/apache_install.log; sudo firewall-cmd --permanent --add-port=80/tcp >> /var/log/apache_install.log 2>&1; sudo firewall-cmd --permanent --add-port=443/tcp >> /var/log/apache_install.log 2>&1; sudo firewall-cmd --reload>> /var/log/apache_install.log 2>&1; echo Waiting for Firewall to reload | tee  -a /var/log/apache_install.log; sleep 5; echo Firewall reloaded | tee  -a /var/log/apache_install.log; systemctl -l status firewalld >> /var/log/apache_install.log 2>&1; systemctl start httpd >> /var/log/apache_install.log 2>&1; systemctl status httpd >> /var/log/apache_install.log 2>&1 ') 
 	#Configures system settings to allow public traffic and enable and starts apache.
-	os.system('setsebool -P httpd_enable_homedirs on; chcon -R -t httpd_sys_content_t /home/; chcon -R -t httpd_sys_rw_content_t /home/; systemctl start httpd >> /var/log/apache_install.log 2>&1, systemctl status httpd, systemctl enable httpd')
+	os.system('setsebool -P httpd_enable_homedirs on; chcon -R -t httpd_sys_content_t /home/; chcon -R -t httpd_sys_rw_content_t /home/; systemctl start httpd >> /var/log/apache_install.log 2>&1; systemctl status httpd >> /var/log/apache_install.log 2>&1; systemctl enable httpd>> /var/log/apache_install.log 2>&1')
 
 def main(args):
 	#Changes pythons to tmp directory save files just for the install
