@@ -7,7 +7,7 @@ olcDatabase: {2}hdb
 olcDbDirectory: /var/lib/ldap
 olcSuffix: dc=cit470,dc=nku,dc=edu
 olcRootDN: cn=Manager,dc=cit470,dc=nku,dc=edu
-olcRootPW: {SSHA}mXjzvYQVfkLl8LhJO1K98sWrVSY7+f75 
+olcRootPW: {SSHA}RY9um529b2W5zeBCQdeihUU9BOJt3o7d 
 olcDbIndex: objectClass eq,pres
 olcDbIndex: ou,cn,mail,surname,givenname eq,pres,sub
 structuralObjectClass: olcHdbConfig
