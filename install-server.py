@@ -52,6 +52,6 @@ def main(args):
 	if args.apache == 'apache':
 		print('Installing Apache Web Server 2.4')
 		apache()
-	os.system('echo "System will reboot in 5 seconds..."; shutdown -r 5')
+	os.system('echo "System will reboot in 5 seconds...";sleep 5; shutdown -r 0')
 
 main(args)
