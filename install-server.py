@@ -27,7 +27,7 @@ def apache():
 	#Downloads required Configs and Installs software
 	os.system('echo Installing Apache 2.4 and Mod_ssl.... | tee  -a /var/log/apache_install.log; yum -y install httpd mod_ssl >> /var/log/apache_install.log 2>&1; wget https://github.com/NKU-2-4orBUST/Project1/raw/main/httpd.conf https://github.com/NKU-2-4orBUST/Project1/raw/main/userdir.conf >> /var/log/apache_install.log 2>&1')
 	#Configures apache 2.4 web server
-	os.system('echo Configuring Apache Webserver... | tee -a /var/log/apache_install.log; \\cp httpd.conf /etc/httpd/conf >> /var/log/apache_install.log; \\cp userdir.conf /etc/httpd/conf.d/ >> /var/log/apache_install.log; mkdir /etc/httpd/ssl;  echo "<home><body><h1>It works for Root!</h1></body></html>" > /var/www/html/index.html | tee -a /var/log/ldap_install.log; wget -P /var/www/html/ https://github.com/NKU-2-4orBUST/Project2/raw/main/client_ks.cfg >> /var/log/ldap_install.log')
+	os.system('echo Configuring Apache Webserver... | tee -a /var/log/apache_install.log; \\cp httpd.conf /etc/httpd/conf >> /var/log/apache_install.log; \\cp userdir.conf /etc/httpd/conf.d/ >> /var/log/apache_install.log; mkdir /etc/httpd/ssl;  echo "<home><body><h1>It works for Root!</h1></body></html>" > /var/www/html/index.html | tee -a /var/log/ldap_install.log; wget -P /var/www/html/ https://github.com/NKU-2-4orBUST/Project2/raw/main/client-ks.cfg >> /var/log/ldap_install.log')
 	#Changes to new SLL directory to generate SSL keys in the next step
 	os.chdir('/etc/httpd/ssl')#Changes to SSL directory
 	#Generates SSL keys for HTTPS 
