@@ -3,7 +3,7 @@ import os, argparse
 parser=argparse.ArgumentParser(usage='Quickly install or reinstall servers',description='Used to install 1 or more servers including: Apache 2.4, NFS, and LDAP  |  Format: python3 ./install-server [-l,--ldap][-n,--nfs][-a,--apache]',add_help=True,allow_abbrev=True)
 parser.add_argument('-l','--ldap', help='installs and Configure LDAP services using openldap and its dependencies.',action='store_const', const='ldap')
 parser.add_argument('-n','--nfs', help='installs and Configure NFS services',action='store_const', const='nfs')
-parser.add_argument('-a','--apache', help='installs and Configure apache webserver 2.4 services using openldap and its dependencies.',action='store_const', const='apache')
+#parser.add_argument('-a','--apache', help='installs and Configure apache webserver 2.4 services using openldap and its dependencies.',action='store_const', const='apache')
 args = parser.parse_args()
 
 def ldap():
